@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adventure Works Sales Dashboard | Noura Helaly</title>
+  <meta name="description" content="A multi-view Excel sales dashboard analyzing 2011–2014 Adventure Works data across regions, product categories, and order channels. Built with PivotTables, PivotCharts, and slicers." />
+  <meta name="author" content="Noura Helaly" />
+  <meta property="og:title" content="Adventure Works Sales Dashboard" />
+  <meta property="og:description" content="Excel analytics project: $2.93B in sales analyzed across 10 regions, 4 product categories, and 4 years." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <span class="nav-logo">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <rect x="2" y="10" width="4" height="8" rx="1" fill="currentColor" opacity="0.6"/>
+          <rect x="8" y="6" width="4" height="12" rx="1" fill="currentColor" opacity="0.8"/>
+          <rect x="14" y="2" width="4" height="16" rx="1" fill="currentColor"/>
+        </svg>
+        Adventure Works Sales
+      </span>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#kpis">KPIs</a>
+        <a href="#insights">Insights</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="https://github.com/NouraElsaman/Adventure-Work_Sales_Excel_Dashboard" target="_blank" rel="noopener" class="nav-cta">GitHub →</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-bg-grid" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Excel · PivotTables · PivotCharts · Slicers
+      </div>
+      <h1 class="hero-title">Adventure Works<br /><span class="gradient-text">Sales Dashboard</span></h1>
+      <p class="hero-subtitle">
+        A multi-view Excel dashboard analyzing <strong>$2.93 billion</strong> in sales across
+        <strong>10 territories</strong>, <strong>4 product categories</strong>, and
+        <strong>4 years</strong> (2011–2014) — built with PivotTables, PivotCharts, and interactive slicers.
+      </p>
+      <div class="hero-actions">
+        <a href="https://github.com/NouraElsaman/Adventure-Work_Sales_Excel_Dashboard/raw/main/Adventure%20Works%20Sales.xlsx"
+           class="btn btn-primary" id="hero-download-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Workbook
+        </a>
+        <a href="https://github.com/NouraElsaman/Adventure-Work_Sales_Excel_Dashboard"
+           target="_blank" rel="noopener" class="btn btn-secondary" id="hero-github-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.167 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836a9.58 9.58 0 012.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+      <div class="hero-screenshot">
+        <div class="screenshot-frame">
+          <div class="screenshot-bar" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <img src="assets/dashboard-overview.png"
+               alt="Adventure Works Sales Dashboard — Products & Category view showing Total Sales of $2.93B, Bikes Sales 40.65%, KPI cards, bar charts for products per category, pie chart for sales per category, and subcategory treemap"
+               class="screenshot-img"
+               loading="eager" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="section" id="overview">
+    <div class="container">
+      <div class="section-label">Project Overview</div>
+      <h2 class="section-title">What this dashboard analyzes</h2>
+      <p class="section-desc">
+        This project uses the Adventure Works sample dataset — a Microsoft reference dataset representing
+        a fictional sporting goods manufacturer — to build a comprehensive, multi-view sales analysis dashboard in Excel.
+        The goal was to answer concrete business questions about performance across time, product categories, territories, and order channels.
+      </p>
+      <div class="overview-grid">
+        <div class="overview-card" id="overview-scope">
+          <div class="overview-icon" aria-hidden="true">🗂️</div>
+          <h3>Business Scope</h3>
+          <p>Multi-year sales analysis for a sporting goods company selling Bikes, Components, Clothing, and Accessories across North America and Europe.</p>
+        </div>
+        <div class="overview-card" id="overview-time">
+          <div class="overview-icon" aria-hidden="true">📅</div>
+          <h3>Time Period</h3>
+          <p>4 full years of transaction data spanning <strong>2011 through 2014</strong>, enabling year-over-year and monthly trend analysis.</p>
+        </div>
+        <div class="overview-card" id="overview-geo">
+          <div class="overview-icon" aria-hidden="true">🌍</div>
+          <h3>10 Territories</h3>
+          <p>Southwest, Canada, Northwest, Central, Northeast, Southeast (North America) · France, United Kingdom, Germany, Australia (International).</p>
+        </div>
+        <div class="overview-card" id="overview-channel">
+          <div class="overview-icon" aria-hidden="true">🛒</div>
+          <h3>Dual Channel</h3>
+          <p>Offline orders (3,806) and Online orders (27,659) captured separately, enabling channel mix analysis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPIs -->
+  <section class="section section-dark" id="kpis">
+    <div class="container">
+      <div class="section-label">Verified Metrics</div>
+      <h2 class="section-title">Headline KPIs</h2>
+      <p class="section-desc">
+        All values below are read directly from the dashboard or PivotTable output cells.
+        None have been estimated or fabricated.
+      </p>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-primary" id="kpi-total-sales">
+          <div class="kpi-label">Total Sales</div>
+          <div class="kpi-value">$2.93<span class="kpi-unit">B</span></div>
+          <div class="kpi-sub">$2,926,970,124 · all orders, all years</div>
+        </div>
+        <div class="kpi-card" id="kpi-total-orders">
+          <div class="kpi-label">Total Orders</div>
+          <div class="kpi-value">31,465</div>
+          <div class="kpi-sub">Distinct sales order IDs</div>
+        </div>
+        <div class="kpi-card" id="kpi-customers">
+          <div class="kpi-label">Customers</div>
+          <div class="kpi-value">19,119</div>
+          <div class="kpi-sub">Distinct customer accounts</div>
+        </div>
+        <div class="kpi-card" id="kpi-products">
+          <div class="kpi-label">Products</div>
+          <div class="kpi-value">295</div>
+          <div class="kpi-sub">Distinct SKUs across 4 categories</div>
+        </div>
+        <div class="kpi-card" id="kpi-sellers">
+          <div class="kpi-label">Salespeople</div>
+          <div class="kpi-value">18</div>
+          <div class="kpi-sub">Distinct sales representatives</div>
+        </div>
+        <div class="kpi-card" id="kpi-bikes-share">
+          <div class="kpi-label">Bikes Sales Share</div>
+          <div class="kpi-value">40.65<span class="kpi-unit">%</span></div>
+          <div class="kpi-sub">Largest category by revenue</div>
+        </div>
+        <div class="kpi-card" id="kpi-road-bikes">
+          <div class="kpi-label">Road Bikes Share</div>
+          <div class="kpi-value">21.3<span class="kpi-unit">%</span></div>
+          <div class="kpi-sub">Top single subcategory</div>
+        </div>
+        <div class="kpi-card" id="kpi-qty-sold">
+          <div class="kpi-label">Units Sold</div>
+          <div class="kpi-value">274,914</div>
+          <div class="kpi-sub">Total order quantity across all products</div>
+        </div>
+      </div>
+
+      <!-- Category Breakdown -->
+      <div class="category-breakdown" id="category-breakdown">
+        <h3 class="breakdown-title">Sales by Category (verified)</h3>
+        <div class="breakdown-bars">
+          <div class="breakdown-row" id="cat-bikes">
+            <span class="breakdown-label">Bikes</span>
+            <div class="breakdown-bar-wrap">
+              <div class="breakdown-bar" style="width: 40.65%" data-pct="40.65%"></div>
+            </div>
+            <span class="breakdown-pct">40.65%</span>
+          </div>
+          <div class="breakdown-row" id="cat-components">
+            <span class="breakdown-label">Components</span>
+            <div class="breakdown-bar-wrap">
+              <div class="breakdown-bar breakdown-bar--2" style="width: 31.79%" data-pct="31.79%"></div>
+            </div>
+            <span class="breakdown-pct">31.79%</span>
+          </div>
+          <div class="breakdown-row" id="cat-clothing">
+            <span class="breakdown-label">Clothing</span>
+            <div class="breakdown-bar-wrap">
+              <div class="breakdown-bar breakdown-bar--3" style="width: 18.53%" data-pct="18.53%"></div>
+            </div>
+            <span class="breakdown-pct">18.53%</span>
+          </div>
+          <div class="breakdown-row" id="cat-accessories">
+            <span class="breakdown-label">Accessories</span>
+            <div class="breakdown-bar-wrap">
+              <div class="breakdown-bar breakdown-bar--4" style="width: 9.02%" data-pct="9.02%"></div>
+            </div>
+            <span class="breakdown-pct">9.02%</span>
+          </div>
+        </div>
+        <p class="breakdown-note">Source: PivotTable output in workbook <strong>Pivot Data</strong> sheet &middot; values extracted programmatically</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insights -->
+  <section class="section" id="insights">
+    <div class="container">
+      <div class="section-label">Data Analysis</div>
+      <h2 class="section-title">Key Insights</h2>
+      <p class="section-desc">
+        Observations derived from workbook data and dashboard visuals. Comparisons are based on displayed values.
+        Causal explanations are not claimed unless directly supported by the data.
+      </p>
+      <div class="insights-grid">
+
+        <div class="insight-card" id="insight-southwest">
+          <div class="insight-rank">#1 Region</div>
+          <h3>Southwest leads all territories</h3>
+          <p>Southwest generated <strong>$696.9M</strong> in sales — the highest of all 10 territories and approximately 23.8% of total revenue. Canada follows at <strong>$527.0M</strong>. The three US-domestic territories (Southwest, Canada, Northwest) together account for the majority of total sales.</p>
+          <div class="insight-data">
+            <span class="data-chip">Southwest: $696.9M</span>
+            <span class="data-chip">Canada: $527.0M</span>
+            <span class="data-chip">Australia: $70.6M (lowest)</span>
+          </div>
+        </div>
+
+        <div class="insight-card" id="insight-road-bikes">
+          <div class="insight-rank">#1 Subcategory</div>
+          <h3>Road Bikes dominates subcategory sales</h3>
+          <p>Road Bikes generated <strong>$624.9M</strong>, making it the highest-revenue subcategory by a significant margin. Mountain Bikes follow at <strong>$357.0M</strong>. Together, Road and Mountain Bikes account for approximately 33.6% of total sales.</p>
+          <div class="insight-data">
+            <span class="data-chip">Road Bikes: $624.9M</span>
+            <span class="data-chip">Mountain Bikes: $357.0M</span>
+            <span class="data-chip">Road Frames: $240.9M</span>
+          </div>
+        </div>
+
+        <div class="insight-card" id="insight-seasonality">
+          <div class="insight-rank">Trend</div>
+          <h3>March and May show peak monthly sales</h3>
+          <p>Monthly sales data shows <strong>May ($391.0M)</strong> and <strong>March ($382.6M)</strong> as the two strongest months. November is the weakest month at <strong>$94.9M</strong>. February is the second-lowest at <strong>$103.4M</strong>. This creates a visible seasonal pattern with a mid-year peak and late-year softness.</p>
+          <div class="insight-data">
+            <span class="data-chip">May: $390.9M (peak)</span>
+            <span class="data-chip">Nov: $94.9M (lowest)</span>
+            <span class="data-chip">Ratio: 4.1×</span>
+          </div>
+        </div>
+
+        <div class="insight-card" id="insight-channel">
+          <div class="insight-rank">Channel</div>
+          <h3>Offline orders carry far higher average value</h3>
+          <p>Offline orders (3,806) generated <strong>$2.86B</strong> in sales — an average of approximately <strong>$752,000 per offline order</strong>. Online orders (27,659) generated <strong>$65.4M</strong> — an average of approximately <strong>$2,366 per online order</strong>. This difference is consistent with offline orders including bulk/wholesale Bike purchases versus smaller individual online accessory orders.</p>
+          <div class="insight-data">
+            <span class="data-chip">Offline: $2.86B (97.8%)</span>
+            <span class="data-chip">Online: $65.4M (2.2%)</span>
+          </div>
+        </div>
+
+        <div class="insight-card" id="insight-products">
+          <div class="insight-rank">Product Mix</div>
+          <h3>Components carry strong revenue despite lower visibility</h3>
+          <p>Components represent <strong>31.79%</strong> of total sales — nearly as large as the entire Bikes category (40.65%). Within Components, Road Frames ($240.9M) and Mountain Frames ($222.7M) are the strongest subcategories. This suggests that accessory/parts purchases are a significant revenue stream alongside complete bicycles.</p>
+          <div class="insight-data">
+            <span class="data-chip">Components: 31.79%</span>
+            <span class="data-chip">Road Frames: $240.9M</span>
+          </div>
+        </div>
+
+        <div class="insight-card" id="insight-accessories">
+          <div class="insight-rank">Volume Leader</div>
+          <h3>Low-price items dominate unit volume</h3>
+          <p>Road Bikes lead sales revenue at <strong>$624.9M</strong> but appear lower in unit quantity rankings. The top 5 products by <em>quantity sold</em> are dominated by low-unit-price accessories: Long-Sleeve Logo Jersey L (~6,000 units), AWC Logo Cap (~6,000 units), and Sport-100 Helmets across color variants. This illustrates the classic revenue-vs-volume trade-off in product mix analysis.</p>
+          <div class="insight-data">
+            <span class="data-chip">Top qty: Jersey & Cap (~6K units each)</span>
+            <span class="data-chip">Top revenue: Road Bikes ($624.9M)</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Questions -->
+  <section class="section section-dark" id="questions">
+    <div class="container">
+      <div class="section-label">Analytical Thinking</div>
+      <h2 class="section-title">Business Questions Answered</h2>
+      <p class="section-desc">Questions the dashboard is designed to answer, with answers supported by workbook data.</p>
+      <div class="qa-list">
+
+        <div class="qa-item" id="qa-1">
+          <div class="qa-q">
+            <span class="qa-icon" aria-hidden="true">Q</span>
+            Which product category generates the most sales revenue?
+          </div>
+          <div class="qa-a">
+            <strong>Bikes</strong> leads all categories at <strong>40.65%</strong> of total sales (~$1.19B). Components follow at 31.79% (~$929.6M). Together, Bikes and Components represent over 72% of total revenue.
+          </div>
+        </div>
+
+        <div class="qa-item" id="qa-2">
+          <div class="qa-q">
+            <span class="qa-icon" aria-hidden="true">Q</span>
+            Which region performed best?
+          </div>
+          <div class="qa-a">
+            <strong>Southwest</strong> generated $696.9M — the highest of all 10 territories. It outperformed the second-place Canada territory ($527.0M) by approximately $169.9M or roughly 32%. Australia was the lowest-performing territory at $70.6M.
+          </div>
+        </div>
+
+        <div class="qa-item" id="qa-3">
+          <div class="qa-q">
+            <span class="qa-icon" aria-hidden="true">Q</span>
+            Which months show the strongest sales activity?
+          </div>
+          <div class="qa-a">
+            <strong>May ($391.0M)</strong> and <strong>March ($382.6M)</strong> are the two peak months. The weakest months are November ($94.9M) and February ($103.4M). The peak-to-trough ratio between May and November is approximately 4.1×.
+          </div>
+        </div>
+
+        <div class="qa-item" id="qa-4">
+          <div class="qa-q">
+            <span class="qa-icon" aria-hidden="true">Q</span>
+            What is the top-selling subcategory?
+          </div>
+          <div class="qa-a">
+            <strong>Road Bikes</strong> at $624.9M is the top subcategory, representing approximately 21.3% of all sales. This aligns with the "Road Bikes 21.3%" KPI card visible on the dashboard.
+          </div>
+        </div>
+
+        <div class="qa-item" id="qa-5">
+          <div class="qa-q">
+            <span class="qa-icon" aria-hidden="true">Q</span>
+            How does the offline vs. online channel split look?
+          </div>
+          <div class="qa-a">
+            By <strong>sales value</strong>, Offline dominates at ~$2.86B (97.8%) vs Online at ~$65.4M (2.2%). By <strong>order count</strong>, Online actually has more orders (27,659) than Offline (3,806). This means offline orders have a much higher average order value, consistent with bulk/wholesale Bike sales.
+          </div>
+        </div>
+
+        <div class="qa-item" id="qa-6">
+          <div class="qa-q">
+            <span class="qa-icon" aria-hidden="true">Q</span>
+            Which individual products appear in the top 5 by total sales?
+          </div>
+          <div class="qa-a">
+            Based on the dashboard's "Top 5 Products" chart: <strong>AWC Logo Cap</strong>, <strong>Long-Sleeve Logo Jersey L</strong>, <strong>Sport-100 Helmet Blue</strong>, <strong>Sport-100 Helmet Black</strong>, and <strong>Sport-100 Helmet Red</strong>. All five appear in the range of approximately $35M–$50M each (as shown on the chart axis).
+          </div>
+        </div>
+
+        <div class="qa-item" id="qa-7">
+          <div class="qa-q">
+            <span class="qa-icon" aria-hidden="true">Q</span>
+            How many distinct customers and products does the data cover?
+          </div>
+          <div class="qa-a">
+            The dataset covers <strong>19,119 distinct customers</strong> and <strong>295 distinct products</strong> across 4 categories, as confirmed by the KPI cards on the dashboard.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Preview -->
+  <section class="section" id="dashboard">
+    <div class="container">
+      <div class="section-label">Dashboard Views</div>
+      <h2 class="section-title">Dashboard Screenshots</h2>
+      <p class="section-desc">
+        The dashboard consists of multiple views navigable via the left sidebar icons.
+        Screenshots show the actual Excel workbook with slicers active.
+        These are static images — the interactive experience requires opening the Excel workbook.
+      </p>
+      <div class="gallery" id="dashboard-gallery">
+
+        <div class="gallery-item" id="gallery-1">
+          <div class="gallery-frame">
+            <img src="assets/dashboard-overview.png"
+                 alt="Dashboard view 1: Products per Category bar chart, Sales per Category pie chart (Bikes 40%, Components 33%, Clothing 8%, Accessories 19%), Top Sub-Products bar chart, and Quantity Top 3 Sub-categories per Category treemap. Slicers show Category (Accessories, Bikes selected) and Order Type (Offline, Online)."
+                 loading="lazy" />
+          </div>
+          <div class="gallery-caption">
+            <strong>View 1 — Product &amp; Category Analysis</strong>
+            <p>Products per category, sales share by category (pie), top subcategory bar chart, quantity treemap by category.</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" id="gallery-2">
+          <div class="gallery-frame">
+            <img src="assets/dashboard-region-monthly.png"
+                 alt="Dashboard view 2: Sales per Region bar chart with Southwest leading, Sales per month line chart, Month Analysis combo chart (Average Due bar + Quantity Sold and Products lines), Top 5 Products bar chart."
+                 loading="lazy" />
+          </div>
+          <div class="gallery-caption">
+            <strong>View 2 — Region &amp; Monthly Trends</strong>
+            <p>Sales per region (bar), sales per month (line), monthly analysis combo chart (average order value, quantity, product count), top 5 products by revenue.</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" id="gallery-3">
+          <div class="gallery-frame">
+            <img src="assets/dashboard-subcategory-sales.png"
+                 alt="Dashboard view 3: Sales in million Top 3 Sub-categories per Category horizontal bar chart grouped by Bikes, Clothing, Components, Accessories. Quantities Top 3 Sub-categories horizontal bar chart with Road Bikes at 47,196 units."
+                 loading="lazy" />
+          </div>
+          <div class="gallery-caption">
+            <strong>View 3 — Subcategory Deep Dive</strong>
+            <p>Top 3 subcategories per category by sales value and by quantity sold, enabling revenue-vs-volume comparison within each category.</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" id="gallery-4">
+          <div class="gallery-frame">
+            <img src="assets/dashboard-top-products.png"
+                 alt="Dashboard view 4: Top Unit Products horizontal bar chart (Long-Sleeve Logo Jersey L leading at ~30 units), Sales Top Products per month stacked bar chart, Top 5 Products Quantities bar chart, Top 5 Products Sales bar chart."
+                 loading="lazy" />
+          </div>
+          <div class="gallery-caption">
+            <strong>View 4 — Top Products Analysis</strong>
+            <p>Top 5 products by quantity units, by total sales, and monthly sales trend for top 5 products; average unit price comparison.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section section-dark" id="features">
+    <div class="container">
+      <div class="section-label">Technical Build</div>
+      <h2 class="section-title">Dashboard Features</h2>
+      <p class="section-desc">Features verified by programmatic workbook inspection and visual screenshot review.</p>
+      <div class="features-grid">
+        <div class="feature-item" id="feat-pivottable">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div>
+            <h4>PivotTables</h4>
+            <p>A central hidden PivotTable sheet (<strong>Pivot Data</strong>) feeds all 18 charts with aggregated measures including SUM of TotalDue, DISTINCT COUNT of Orders, Customers, Products, and Salespeople.</p>
+          </div>
+        </div>
+        <div class="feature-item" id="feat-pivotcharts">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <h4>PivotCharts — 18 total</h4>
+            <p>Bar charts, horizontal bar charts, pie chart, line chart, doughnut charts (KPI gauges), multi-series combo chart, stacked bar chart — all linked to PivotTable data.</p>
+          </div>
+        </div>
+        <div class="feature-item" id="feat-slicers">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </div>
+          <div>
+            <h4>Interactive Slicers</h4>
+            <p>Three slicers visible in screenshots: <strong>Category</strong> (Accessories, Bikes, Clothing, Components), <strong>Order Type</strong> (Offline, Online), and <strong>Year</strong> (2011, 2012, 2013, 2014). These filter all charts simultaneously.</p>
+          </div>
+        </div>
+        <div class="feature-item" id="feat-kpi-cards">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <div>
+            <h4>KPI Summary Cards</h4>
+            <p>Six KPI cards across the top of the dashboard: Total Sales (with doughnut gauge), Bikes Sales % (doughnut), Road Bikes % (doughnut), Products count, Customers count, Sellers count.</p>
+          </div>
+        </div>
+        <div class="feature-item" id="feat-multiview">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div>
+            <h4>Multi-View Layout</h4>
+            <p>5 visible dashboard sheets, each presenting a different analytical angle. Navigation icons on the left sidebar allow switching between views within the workbook.</p>
+          </div>
+        </div>
+        <div class="feature-item" id="feat-stats">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div>
+            <h4>Descriptive Statistics</h4>
+            <p>Two hidden sheets (<strong>Statistics - Price</strong>, <strong>Statistics - Quantity</strong>) contain Excel Data Analysis ToolPak descriptive statistics outputs for price and quantity distributions (mean, median, standard deviation, skewness, kurtosis).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workflow -->
+  <section class="section" id="workflow">
+    <div class="container">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">Analytical Workflow</h2>
+      <div class="workflow-steps">
+        <div class="workflow-step" id="step-1">
+          <div class="step-number" aria-hidden="true">01</div>
+          <div class="step-content">
+            <h4>Data Acquisition</h4>
+            <p>Sourced the Adventure Works sample dataset, which contains transactional sales data for a fictional sporting goods business. The dataset covers order-level records with product, customer, salesperson, territory, and financial fields.</p>
+          </div>
+        </div>
+        <div class="workflow-step" id="step-2">
+          <div class="step-number" aria-hidden="true">02</div>
+          <div class="step-content">
+            <h4>Data Aggregation with PivotTables</h4>
+            <p>Built PivotTables to aggregate the raw data by region, category, subcategory, product, month, year, and order channel. Applied DISTINCT COUNT for orders, customers, products, and salespeople. A dedicated hidden sheet (<strong>Pivot Data</strong>) holds all PivotTable computations.</p>
+          </div>
+        </div>
+        <div class="workflow-step" id="step-3">
+          <div class="step-number" aria-hidden="true">03</div>
+          <div class="step-content">
+            <h4>Statistical Analysis</h4>
+            <p>Applied Excel's Data Analysis ToolPak to compute descriptive statistics on price and quantity distributions — examining mean, median, standard deviation, skewness, and kurtosis to understand data spread and outliers.</p>
+          </div>
+        </div>
+        <div class="workflow-step" id="step-4">
+          <div class="step-number" aria-hidden="true">04</div>
+          <div class="step-content">
+            <h4>Dashboard Design</h4>
+            <p>Designed 5 multi-view dashboard sheets with a consistent teal/slate color theme, KPI cards (including doughnut chart gauges), and a left sidebar navigation icon layout. Applied chart formatting, labels, and data callouts.</p>
+          </div>
+        </div>
+        <div class="workflow-step" id="step-5">
+          <div class="step-number" aria-hidden="true">05</div>
+          <div class="step-content">
+            <h4>Slicer Integration</h4>
+            <p>Connected three slicers (Category, Order Type, Year) to the PivotTables so a single filter selection updates all 18 charts simultaneously, enabling interactive exploration without VBA or macros.</p>
+          </div>
+        </div>
+        <div class="workflow-step" id="step-6">
+          <div class="step-number" aria-hidden="true">06</div>
+          <div class="step-content">
+            <h4>Business Interpretation</h4>
+            <p>Identified key patterns: regional performance hierarchy, seasonal sales rhythm, the revenue/volume trade-off between Bikes and accessories, and the asymmetric offline/online channel value split.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Strengths & Limitations -->
+  <section class="section section-dark" id="evaluation">
+    <div class="container">
+      <div class="section-label">Honest Assessment</div>
+      <h2 class="section-title">Strengths &amp; Limitations</h2>
+      <div class="eval-grid">
+        <div class="eval-card eval-strengths" id="strengths-card">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Dashboard Strengths
+          </h3>
+          <ul>
+            <li>Multi-view layout provides distinct analytical angles without overwhelming any single view</li>
+            <li>KPI row at top gives instant orientation — revenue scale, category mix, and team size at a glance</li>
+            <li>Slicer-based filtering enables fast what-if comparisons (e.g., Bikes-only by year by channel)</li>
+            <li>Doughnut chart KPI cards are an effective visual shorthand for percentage metrics</li>
+            <li>Subcategory breakdown views enable drill-down from category level to individual subcategory</li>
+            <li>Descriptive statistics sheets show analytical depth beyond surface-level charting</li>
+            <li>Consistent color palette across all views reduces cognitive load</li>
+          </ul>
+        </div>
+        <div class="eval-card eval-limits" id="limitations-card">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/><circle cx="12" cy="12" r="10"/></svg>
+            Limitations &amp; Future Improvements
+          </h3>
+          <ul>
+            <li>Year-over-year growth rates are not directly displayed — a YoY comparison view would add analytical depth</li>
+            <li>The "Month Analysis" combo chart mixes Average Due, Quantity Sold, and Product Count on different scales, requiring careful reading</li>
+            <li>No profitability data is available — the analysis covers revenue (TotalDue) but not cost or margin</li>
+            <li>Individual salesperson performance is not broken down in the visible dashboard views</li>
+            <li>The dataset is a sample/fictional dataset (Adventure Works), so findings reflect data structure rather than a real business</li>
+            <li>Sheet names have been professionally updated (Dashboard - Category, Pivot Data, Statistics - Price, etc.) from the original generic naming</li>
+
+            <li>A Power BI or Tableau version could enable richer cross-filtering and drill-through capabilities</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Use -->
+  <section class="section" id="how-to-use">
+    <div class="container">
+      <div class="section-label">Getting Started</div>
+      <h2 class="section-title">How to Use the Workbook</h2>
+      <div class="howto-steps">
+        <div class="howto-step" id="howto-1">
+          <div class="howto-num">1</div>
+          <div>
+            <h4>Download the Excel file</h4>
+            <p>Click the download button below or clone the repository. Open <code>Adventure Works Sales.xlsx</code> in Microsoft Excel (2016 or later recommended for full slicer support).</p>
+          </div>
+        </div>
+        <div class="howto-step" id="howto-2">
+          <div class="howto-num">2</div>
+          <div>
+            <h4>Enable content if prompted</h4>
+            <p>If Excel shows a security bar, click <em>Enable Content</em> to allow the PivotTable connections to activate properly.</p>
+          </div>
+        </div>
+        <div class="howto-step" id="howto-3">
+          <div class="howto-num">3</div>
+          <div>
+            <h4>Navigate between dashboard views</h4>
+            <p>Use the icon panel on the left sidebar of the dashboard to switch between the 5 analytical views. Each view focuses on a different dimension of the data.</p>
+          </div>
+        </div>
+        <div class="howto-step" id="howto-4">
+          <div class="howto-num">4</div>
+          <div>
+            <h4>Use the slicers to filter</h4>
+            <p>Click any button on the three slicers — <strong>Category</strong>, <strong>Order Type</strong>, and <strong>Year</strong> — to filter all charts on the dashboard simultaneously. Hold Ctrl to select multiple values.</p>
+          </div>
+        </div>
+        <div class="howto-step" id="howto-5">
+          <div class="howto-num">5</div>
+          <div>
+            <h4>Explore the hidden analytical sheets</h4>
+            <p>Right-click any sheet tab and choose <em>Unhide</em> to access the hidden <strong>Pivot Data</strong> sheet (all PivotTables) and <strong>Statistics - Price</strong> / <strong>Statistics - Quantity</strong> sheets for deeper data exploration.</p>
+          </div>
+        </div>
+      </div>
+      <div class="howto-actions">
+        <a href="https://github.com/NouraElsaman/Adventure-Work_Sales_Excel_Dashboard/raw/main/Adventure%20Works%20Sales.xlsx"
+           class="btn btn-primary" id="download-workbook-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Adventure Works Sales.xlsx
+        </a>
+        <a href="https://github.com/NouraElsaman/Adventure-Work_Sales_Excel_Dashboard"
+           target="_blank" rel="noopener" class="btn btn-secondary" id="view-repo-btn">
+          View Repository on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <span class="footer-name">Noura Helaly</span>
+          <span class="footer-role">Data Analytics Portfolio</span>
+        </div>
+        <div class="footer-center">
+          <p class="footer-disclaimer">
+            This is a portfolio/learning project built on the Adventure Works sample dataset.
+            It does not represent real business data or professional client work.
+          </p>
+        </div>
+        <div class="footer-right">
+          <a href="https://github.com/NouraElsaman" target="_blank" rel="noopener" class="footer-link" id="footer-github">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-label="GitHub profile"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.167 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836a9.58 9.58 0 012.504.337c1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Noura Helaly · MIT License · Adventure Works data is a Microsoft sample dataset</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll-activated nav
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Intersection observer for section entrance animations
+    const animEls = document.querySelectorAll(
+      '.kpi-card, .overview-card, .insight-card, .qa-item, .workflow-step, .feature-item, .gallery-item, .howto-step'
+    );
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    animEls.forEach(el => observer.observe(el));
+
+    // Animate category bars on scroll
+    const bars = document.querySelectorAll('.breakdown-bar');
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.width = e.target.style.width;
+          e.target.classList.add('bar-animated');
+          barObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    bars.forEach(b => {
+      const target = b.style.width;
+      b.style.width = '0';
+      setTimeout(() => barObserver.observe(b), 100);
+      b._targetWidth = target;
+    });
+
+    // Fix: animate bar width when visible
+    const barObserver2 = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const bar = e.target;
+          const pct = bar.getAttribute('data-pct');
+          bar.style.transition = 'width 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+          bar.style.width = pct;
+          barObserver2.unobserve(bar);
+        }
+      });
+    }, { threshold: 0.3 });
+    bars.forEach(b => barObserver2.observe(b));
+  </script>
+</body>
+</html>
